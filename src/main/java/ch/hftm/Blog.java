@@ -1,11 +1,19 @@
 package ch.hftm;
-import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTransient;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
+@Entity
 public class Blog {
-    @JsonbProperty("title")
+
+    @Id
+    @GeneratedValue
+    @JsonbTransient
+    private long id;
+
     private String title;
 
-    @JsonbProperty("content")
     private String content;
 
     public Blog() {
@@ -31,5 +39,4 @@ public class Blog {
     public void setContent(String content){
         this.content = content;
     }
-
 }

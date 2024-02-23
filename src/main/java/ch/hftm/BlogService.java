@@ -1,19 +1,24 @@
 package ch.hftm;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
-import java.util.ArrayList;
 import java.util.List;
 
-@ApplicationScoped
+@Dependent
 public class BlogService {
 
+    @Inject
+    BlogRepository blogRepository;
+
     public List<Blog> getAll() {
-        List<Blog> blogs = new ArrayList<>();
-        Blog blog1 = new Blog("Hallo Welt", "Dies ist ein Test");
-        Blog blog2 = new Blog("Hallo Welt 2", "Dies ist ein Test 2");
-        blogs.add(blog1);
-        blogs.add(blog2);
-        return blogs;
+        return this.blogRepository.listAll();
+    }
+
+    @Transactional
+    public Response create(Blog blog) {
+        blogRepository.persist(blog);
+        return null;
     }
 }
