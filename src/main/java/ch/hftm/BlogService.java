@@ -1,4 +1,5 @@
 package ch.hftm;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.Dependent;
@@ -25,13 +26,13 @@ public class BlogService {
         return this.blogRepository.listAll();
     }
 
-    public void  create(Blog blog) {
+    public void create(Blog blog) {
         var savedBlog = save(blog);
-        validationRequestEmitter.send(new TextValidatorResponseDto(savedBlog.getContent() + "|" + savedBlog.getTitle(), savedBlog.getId()));
+        validationRequestEmitter.send(new TextValidatorResponseDto(savedBlog.getContent() + " | " + savedBlog.getTitle(), savedBlog.getId()));
     }
 
     @Transactional
-    public Blog save(Blog blog){
+    public Blog save(Blog blog) {
         blogRepository.persist(blog);
         return blog;
     }
@@ -42,12 +43,9 @@ public class BlogService {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             TextValidatorResponseDto textValidatorResponseDto = objectMapper.readValue(message, TextValidatorResponseDto.class);
-            blogRepository.update("isValid = ?1 where id = ?2", textValidatorResponseDto.getValid(), textValidatorResponseDto.getId());
+            blogRepository.update("valid = ?1 where id = ?2", textValidatorResponseDto.getValid(), textValidatorResponseDto.getId());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }
-//    public void validateText(TextValidatorResponseDto textValidatorResponseDto) {
-//        blogRepository.update("valid = ?1 where id = ?2", textValidatorResponseDto.getValid(), textValidatorResponseDto.getId());
-//    }
 }

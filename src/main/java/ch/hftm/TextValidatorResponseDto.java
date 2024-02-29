@@ -1,4 +1,5 @@
 package ch.hftm;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TextValidatorResponseDto {
 
@@ -6,13 +7,13 @@ public class TextValidatorResponseDto {
     private String text;
     private boolean valid;
 
+    public TextValidatorResponseDto() {
+    }
+
 //    public TextValidatorResponseDto(String text, boolean isValid) {
 //        this.text = text;
 //        this.isValid = isValid;
 //    }
-
-    public TextValidatorResponseDto() {
-    }
 
     public TextValidatorResponseDto(String text, long sourceId) {
         this.text = text;
