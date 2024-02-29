@@ -20,8 +20,8 @@ public class BlogResource {
 
     @Inject
     @Channel("text-validator-request")
-//    Emitter<Blog> validationRequestEmitter;
-    Emitter<String> validationRequestEmitter;
+    Emitter<Blog> validationRequestEmitter;
+//    Emitter<String> validationRequestEmitter;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -40,7 +40,7 @@ public class BlogResource {
     public Response validateBlog(Blog blog) {
         this.blogService.create(blog);
         String blogContent = blog.getContent();
-        validationRequestEmitter.send(blogContent);
+        validationRequestEmitter.send(blog);
         return Response.accepted().build();
     }
 
