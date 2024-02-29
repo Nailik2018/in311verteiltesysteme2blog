@@ -38,10 +38,7 @@ public class BlogResource {
     @POST
     @Path("/validate")
     public Response validateBlog(Blog blog) {
-        // Hier wird der Blog-Inhalt validiert
-        // Annahme: Die Blog-Daten werden als Objekt übergeben
         this.blogService.create(blog);
-        // Sende Validierungsanfrage an den Textvalidierungsservice über Kafka
         String blogContent = blog.getContent();
         validationRequestEmitter.send(blogContent);
         return Response.accepted().build();
@@ -49,10 +46,10 @@ public class BlogResource {
 
 //    @POST
 //    @Path("/validate")
-//    @Outgoing("text-validator-request") // Namen des Kafka-Topics für Validierungsanfragen
+//    @Outgoing("text-validator-request")
 //    public Response validateBlog(Blog blog) {
 //        this.blogService.create(blog);
-//        validationRequestEmitter.send(blog); // Hier senden Sie direkt den Blog
+//        validationRequestEmitter.send(blog);
 //        return Response.accepted().build();
 //    }
 }
