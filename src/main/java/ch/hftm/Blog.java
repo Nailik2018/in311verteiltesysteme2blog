@@ -16,7 +16,7 @@ public class Blog {
 
     private String content;
 
-    private boolean isValid = false;
+    private boolean valid = false;
 
     public Blog() {
     }
@@ -24,7 +24,11 @@ public class Blog {
     public Blog(String title, String content) {
         this.title = title;
         this.content = content;
-        isValid = false;
+        this.valid = false;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -35,8 +39,8 @@ public class Blog {
         return this.content;
     }
 
-    public boolean getIsValid(){
-        return isValid;
+    public boolean getValid(){
+        return valid;
     }
 
     public void setTitle(String title) {
@@ -47,7 +51,7 @@ public class Blog {
         this.content = content;
     }
 
-    public void setIsValid(boolean isValid){
-        this.isValid = isValid;
+    public void setValid(boolean valid){
+        this.valid = valid;
     }
 }

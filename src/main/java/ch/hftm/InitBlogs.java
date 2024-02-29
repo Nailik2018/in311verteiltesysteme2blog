@@ -24,7 +24,7 @@ public class InitBlogs {
         Blog blog2 = new Blog();
         blog2.setTitle("Tenerifa Spanien");
         blog2.setContent("Lost places, Vulkan und Meer");
-        blog2.setIsValid(true);
+        blog2.setValid(true);
         Blog blog3 = new Blog();
         blog3.setTitle("Gleitschirmferien in Bosnien und Herzegowina");
         blog3.setContent("Gleitschirmfliegen in Bosnien und Herzegowina");
